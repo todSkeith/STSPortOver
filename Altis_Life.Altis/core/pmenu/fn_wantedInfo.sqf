@@ -30,4 +30,4 @@ _bounty = _data select 3;
 	};
 } foreach _crimes;
 
-ctrlSetText[2403,format["Current Bounty Price: $%1",[_bounty] call life_fnc_numberText]];
+((findDisplay 2400) displayCtrl 2403) ctrlSetStructuredText parseText format ["$%1", [_bounty] call life_fnc_numberText];

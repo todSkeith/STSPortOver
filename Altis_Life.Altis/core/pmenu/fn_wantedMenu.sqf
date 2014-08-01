@@ -16,7 +16,9 @@ _list = _display displayCtrl 2401;
 lbClear _list;
 _units = [];
 
-ctrlSetText[2404,"Establishing connection..."];
+//ctrlSetText[2404,"Establishing connection..."];
+((findDisplay 2400) displayCtrl 2404) ctrlSetStructuredText parseText "Establishing connection...";
+((findDisplay 2400) displayCtrl 2406) ctrlSetStructuredText parseText format ["Welcome Back Officer %1", name player];
 
 if(__GETC__(life_coplevel) < 3 && __GETC__(life_adminlevel) == 0) then
 {

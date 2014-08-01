@@ -26,7 +26,8 @@ _units = [];
 	};
 } foreach _info;
 
-ctrlSetText[2404,"Connection Established"];
+//ctrlSetText[2404,"Connection Established"];
+((findDisplay 2400) displayCtrl 2404) ctrlSetStructuredText parseText "Connection Established";
 
 if(((lbSize _list)-1) == -1) then
 {
