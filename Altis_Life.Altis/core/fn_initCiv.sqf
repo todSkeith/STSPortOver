@@ -26,3 +26,11 @@ if(life_is_arrested) then
 player addRating 9999999;
 
 [] call life_fnc_zoneCreator;
+[] call life_fnc_equipGear;
+[] call life_fnc_initHouses;
+
+if((license_civ_bh)) then {
+	player setVariable ["bountyHunter", true, true];
+};
+player addRating 9999999;
+player setVariable ["unconscious", false, true];

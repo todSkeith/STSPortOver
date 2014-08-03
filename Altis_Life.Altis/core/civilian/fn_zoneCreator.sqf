@@ -17,6 +17,7 @@ _peachZones = ["peaches_1","peaches_2","peaches_3","peaches_4"];
 _heroinZones = ["heroin_1"];
 _cocaineZones = ["cocaine_1"];
 _weedZones = ["weed_1"];
+_cornZones = ["corn_1"];
 
 //Create apple zones
 {
@@ -57,3 +58,11 @@ _weedZones = ["weed_1"];
 	_zone setTriggerActivation["CIV","PRESENT",true];
 	_zone setTriggerStatements["player in thislist","LIFE_Action_Coke = player addAction[(localize ""STR_Gather_Cocaine""),life_fnc_gatherCocaine,'',0,false,false,'','!life_action_inUse'];","player removeAction LIFE_Action_Coke;"];
 } foreach _cocaineZones;
+
+//Create corn zones
+{
+	_zone = createTrigger ["EmptyDetector",(getMarkerPos _x)];
+	_zone setTriggerArea[50,50,0,false];
+	_zone setTriggerActivation["CIV","PRESENT",true];
+	_zone setTriggerStatements["player in thislist","LIFE_Action_Corn = player addAction['Gather Corn',life_fnc_gatherCorn,'',0,false,false,'','!life_action_inUse'];","player removeAction LIFE_Action_Corn;"];
+} foreach _cornZones;

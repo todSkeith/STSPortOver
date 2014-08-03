@@ -35,6 +35,16 @@ class Life_Client_Core
 		class admingetID {};
 		class adminMenu {};
 		class adminQuery {};
+		class adminSpectate {}; 
+		class adminTeleport {};
+		class adminTpHere {}; 
+		class adminDebugCon {};
+		class adminCompensate {};
+		class adminAuthenticate {};
+		class adminCheckAuth {};
+		class adminKick {};
+		class adminRepairBuild {};
+		class adminBan {};
 	};
 	
 	class Medical_System
@@ -58,9 +68,18 @@ class Life_Client_Core
 	class Actions
 	{
 		file = "core\actions";
+		class civPullOut {};
+		class civPutInCar {};
 		class buyLicense {};
 		class chemlightUse {};
+		class restrainCiv {};
+		class unzip {};
+		class zipTieAction {};
 		class heal {};
+		class drugeffect_alc {};
+		class drugeffect_coc {};
+		class drugeffect_her {};
+		class drugeffect_mar {};
 		class healHospital {};
 		class pushVehicle {};
 		class repairTruck {};
@@ -77,6 +96,8 @@ class Life_Client_Core
 		class getDPMission {};
 		class postBail {};
 		class processAction {};
+		class robBankAction {};
+		class sellOil {};
 		class suicideBomb {};
 		class arrestAction {};
 		class escortAction {};
@@ -91,12 +112,28 @@ class Life_Client_Core
 		class pickupItem {};
 		class pickupMoney {};
 		class ticketAction {};
+		class gatherCorn {};
 		class gatherPeaches {};
 		class gatherCocaine {};
 		class pumpRepair {};
 		class packupSpikes {};
+		class packupRoadcones {};
+		class packupRoadblock {};
+		class robFederal {};
 		class storeVehicle {};
 		class robAction {};
+		class sellTurtle {};
+		class payrepair {};
+		class robStation {};
+		class nclights {};
+		class ncLightsOn {};
+		class ncmusic {};
+		class ncstage {};
+		class ncsmoke {};
+		class ncflash {};
+		class fuel_consumption {};
+		class reviveHospital {};
+		class confirm {};
 		class captureHideout {};
 	};
 	
@@ -138,7 +175,7 @@ class Life_Client_Core
 		class weaponShopCfg {};
 		class vehicleWeightCfg {};
 		class houseConfig {};
-		
+	
 		//Clothing Store Configs
 		class clothing_cop {};
 		class clothing_bruce {};
@@ -210,6 +247,25 @@ class Life_Client_Core
 		class inventoryClosed {};
 		class inventoryOpened {};
 		class isUIDActive {};
+		class intro {};
+		class playsound {};
+		class setUniform {};
+		class equipGear {};
+		class onDeath {};
+		class onRespawn {};
+		class fedSuccess {};
+		class holsterWeapon {};
+		class abortEnabled {};
+		class handleFlashbang {};
+		class unconsciousMarker {};
+		class autoSave {};
+		class updateCash {};
+        class vehicleGarage {};
+		class unconscious {};
+		class enablecollisionwith {};
+		class disablecollisionwith {};
+		class enableActions {};
+		class actionUpdate {};		
 	};
 	
 	class Network
@@ -242,6 +298,12 @@ class Life_Client_Core
 		class removeLicenses {};
 		class zoneCreator {};
 		class demoChargeTimer {};
+		class civInteractionMenu {};
+		class robReserve {};
+		class surrender {};
+		class execute {};
+		class executeAction {};
+		class jailFeed {};
 	};
 	
 	class Vehicle
@@ -286,6 +348,19 @@ class Life_Client_Core
 		class repairDoor {};
 		class doorAnimate {};
 		class fedCamDisplay {};
+		class copHorn {};
+		class seizeObjects {};
+		class seizePlayerWeapon {};
+		class seizePlayerWeaponAction {};
+		class questionGasStation {};
+		class jailDialog {};
+		class jailPre {};
+		class copOpener {};
+		class houseOwnerSearch {};
+        class houseInvSearch {};
+        class raidHouse {};
+		class takeLeader {};
+		class trackBounty {};
 	};
 	
 	class Gangs
@@ -303,6 +378,14 @@ class Life_Client_Core
 		class gangInvite {};
 		class gangDisband {};
 		class gangDisbanded {};
+		class gangBrowser {};
+		class gangManagement {};
+		class joinGang {};
+		class kickGang {};
+		class leaveGang {};
+		class setGangLeader {};
+		class lockGang {};
+		class unlockGang {};
 	};
 	
 	class Shops
@@ -341,6 +424,13 @@ class Life_Client_Core
 		class blastingCharge {};
 		class defuseKit {};
 		class storageBox {};
+		class crowbar {};
+		class zipTie {};
+		class crabpot {};
+		class chainsaw {};
+		class RoadBlockWood {};
+		class RoadConeStrip {};
+		class lethal {};
 	};
 	
 	class Dialog_Controls

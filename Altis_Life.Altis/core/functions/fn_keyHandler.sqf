@@ -31,6 +31,12 @@ if(life_action_inUse) exitWith {
 
 switch (_code) do
 {
+	//1 Key
+	case 2:
+	{
+		[] call life_fnc_wantedMenu;
+	};
+
 	//Space key for Jumping
 	case 57:
 	{
@@ -67,8 +73,15 @@ switch (_code) do
 				player selectWeapon life_curWep_h;
 			};
 		};
+
+		if(playerSide != civilian && vehicle player != player && ((driver vehicle player) == player)) then
+		{
+			    _veh = vehicle player;
+				[[_veh],"life_fnc_copHorn"] spawn life_fnc_MP;
+				sleep 1;
+		};
 	};
-	
+
 	//Interaction key (default is Left Windows, can be mapped via Controls -> Custom -> User Action 10)
 	case _interactionKey:
 	{
@@ -86,10 +99,30 @@ switch (_code) do
 	//Restraining (Shift + R)
 	case 19:
 	{
-		if(_shift) then {_handled = true;};
-		if(_shift && playerSide == west && !isNull cursorTarget && cursorTarget isKindOf "Man" && (isPlayer cursorTarget) && (side cursorTarget in [civilian,independent]) && alive cursorTarget && cursorTarget distance player < 3.5 && !(cursorTarget getVariable "Escorting") && !(cursorTarget getVariable "restrained") && speed cursorTarget < 1) then
+		//Test to stop reload while restrained
+		if(_shift || (player getVariable "restrained" || player getVariable "zipTie" || player getVariable "surrender" || player getVariable "unconscious")) then {_handled = true;};
+		if(_shift && !isNull cursorTarget && cursorTarget isKindOf "Man" && (isPlayer cursorTarget) && alive cursorTarget && cursorTarget distance player < 3.5) then
 		{
-			[] call life_fnc_restrainAction;
+			switch (playerSide) do {
+				case west:		{ [cursorTarget] call life_fnc_restrainAction; };
+				case civilian:	{ [cursorTarget] call life_fnc_zipTie; };
+			};
+		};
+	};
+
+	//TAB key Surrender
+	case 15:
+	{
+		if (!_shift && !_alt && !_ctrlKey) then
+		{
+			if (vehicle player == player && !(player getVariable ["restrained", false]) && !(player getVariable ["Escorting", false]) && !(player getVariable ["zipTie", false])) then {
+				if (player getVariable ["surrender", false]) then {
+					player setVariable ["surrender", false, true];
+				} else {
+					[] spawn life_fnc_surrender;
+				};
+			};
+			_handled = true;
 		};
 	};
 	
@@ -103,6 +136,16 @@ switch (_code) do
 			{
 				[cursorTarget] spawn life_fnc_knockoutAction;
 			};
+		};
+	};
+
+
+
+	// O Key, police gate opener
+	case 24:
+	{
+		if (!_shift && !_alt && !_ctrlKey && (playerSide == west)) then {
+			[] call life_fnc_copOpener;
 		};
 	};
 
@@ -130,25 +173,31 @@ switch (_code) do
 			};
 		};
 	};
+	
 	//L Key?
-	case 38: 
+	case 38:
 	{
 		//If cop run checks for turning lights on.
-		if(_shift && playerSide in [west,independent]) then {
-			if(vehicle player != player && (typeOf vehicle player) in ["C_Offroad_01_F","B_MRAP_01_F","C_SUV_01_F"]) then {
+		if(_shift && playerSide == west) then {
+			if(vehicle player != player && (typeOf vehicle player) in ["C_Offroad_01_F","B_MRAP_01_F","C_SUV_01_F","C_Hatchback_01_F","C_Hatchback_01_sport_F"]) then {
 				if(!isNil {vehicle player getVariable "lights"}) then {
-					if(playerSide == west) then {
-						[vehicle player] call life_fnc_sirenLights;
-					} else {
-						[vehicle player] call life_fnc_medicSirenLights;
-					};
+					[vehicle player] call life_fnc_sirenLights;
 					_handled = true;
 				};
 			};
 		};
-		
+		if(_shift && playerSide == independent) then {
+			if(vehicle player != player && (typeOf vehicle player) in ["C_Offroad_01_F","B_MRAP_01_F","C_SUV_01_F","C_Hatchback_01_F","C_Hatchback_01_sport_F"]) then {
+				if(!isNil {vehicle player getVariable "lights"}) then {
+					[vehicle player] call life_fnc_medicSirenLights;
+					_handled = true;
+				};
+			};
+		};
+
 		if(!_alt && !_ctrlKey) then { [] call life_fnc_radar; };
 	};
+	
 	//Y Player Menu
 	case 21:
 	{
@@ -157,11 +206,17 @@ switch (_code) do
 			[] call life_fnc_p_openMenu;
 		};
 	};
+
+	//V Key
+	case 47:
+	{
+		if(player getVariable "restrained" OR player getVariable "transporting" OR player getVariable "zipTie") then {_handled = true;};
+	};
 	
 	//F Key
 	case 33:
 	{
-		if(playerSide in [west,independent] && vehicle player != player && !life_siren_active && ((driver vehicle player) == player)) then
+		if(playerSide == west && vehicle player != player && !life_siren_active && ((driver vehicle player) == player)) then
 		{
 			[] spawn
 			{
@@ -173,22 +228,41 @@ switch (_code) do
 			if(isNil {_veh getVariable "siren"}) then {_veh setVariable["siren",false,true];};
 			if((_veh getVariable "siren")) then
 			{
-				titleText [localize "STR_MISC_SirensOFF","PLAIN"];
+				titleText ["Sirens Off","PLAIN"];
 				_veh setVariable["siren",false,true];
 			}
 				else
 			{
-				titleText [localize "STR_MISC_SirensON","PLAIN"];
+				titleText ["Sirens On","PLAIN"];
 				_veh setVariable["siren",true,true];
-				if(playerSide == west) then {
-					[[_veh],"life_fnc_copSiren",nil,true] spawn life_fnc_MP;
-				} else {
-					//I do not have a custom sound for this and I really don't want to go digging for one, when you have a sound uncomment this and change medicSiren.sqf in the medical folder.
-					//[[_veh],"life_fnc_medicSiren",nil,true] spawn life_fnc_MP;
-				};
+				[[_veh],"life_fnc_copSiren",nil,true] spawn life_fnc_MP;
+			};
+		};
+
+		if(playerSide == independent && vehicle player != player && !life_siren_active && ((driver vehicle player) == player)) then
+		{
+			[] spawn
+			{
+				life_siren_active = true;
+				sleep 1;
+				life_siren_active = false;
+			};
+			_veh = vehicle player;
+			if(isNil {_veh getVariable "siren"}) then {_veh setVariable["siren",false,true];};
+			if((_veh getVariable "siren")) then
+			{
+				titleText ["Sirens Off","PLAIN"];
+				_veh setVariable["siren",false,true];
+			}
+				else
+			{
+				titleText ["Sirens On","PLAIN"];
+				_veh setVariable["siren",true,true];
+				[[_veh],"life_fnc_medicSiren",nil,true] spawn life_fnc_MP;
 			};
 		};
 	};
+
 	//U Key
 	case 22:
 	{
@@ -224,6 +298,7 @@ switch (_code) do
 							[[_veh,0],"life_fnc_lockVehicle",_veh,false] spawn life_fnc_MP;
 						};
 						systemChat localize "STR_MISC_VehUnlock";
+						[[_veh, "car_unlock",10],"life_fnc_playSound",true,false] spawn life_fnc_MP;
 					} else {
 						if(local _veh) then {
 							_veh lock 2;
@@ -231,11 +306,23 @@ switch (_code) do
 							[[_veh,2],"life_fnc_lockVehicle",_veh,false] spawn life_fnc_MP;
 						};	
 						systemChat localize "STR_MISC_VehLock";
+						[[_veh, "car_lock",10],"life_fnc_playSound",true,false] spawn life_fnc_MP;
 					};
 				};
 			};
 		};
 	};
+};
+
+if (_code in (actionKeys "Throw") && (player getVariable "restrained" OR player getVariable "transporting" OR player getVariable "zipTie" OR player getVariable "unconscious" OR player getVariable "surrender" or (animationState player == "Incapacitated"))) then {
+	_handled = true;
+};
+
+//Thanks to Asylum
+if (_code in (actionKeys "TacticalView")) then
+{
+	hint "Tactical View is disabled.";
+	_handled = true;
 };
 
 _handled;

@@ -1,45 +1,55 @@
 /*
-	File: fn_civFetchGear.sqf
+	File: fn_saveGear.sqf
 	Author: Bryan "Tonic" Boardwine
 	
 	Description:
-	Fetches specific key items from the civilian for a persistent state.
+	Saves the player / cops gear in a formatted array.
 */
-private["_ret","_uItems","_bItems"];
-_ret = [];
+private["_primary","_handgun","_magazines","_uniform","_vest","_backpack","_items","_primitems","_secitems","_handgunitems","_uitems","_vitems","_bitems","_curWep"];
 
-_ret set[count _ret,uniform player];
-_ret set[count _ret,backpack player];
-_ret set[count _ret,goggles player];
-_ret set[count _ret,headgear player];
-_ret set[count _ret,assignedItems player];
+//Old format / code
+_primary = primaryWeapon player;
+_handgun = handGunWeapon player;
+_magazines = [];
+_uniform = uniform player;
+_vest = vest player;
+_backpack = backpack player;
+_items = assignedItems player;
+_primitems = primaryWeaponItems player;
+_secitems = secondaryWeaponItems player;
+_handgunitems = handGunItems player;
+_uitems = [];
+_vitems = [];
+_bitems = [];
 
-_uItems = [];
-_bItems = [];
+if(_uniform != "") then {{_uitems set[count _uitems,_x];} foreach (uniformItems player);};
+if(_vest != "") then {{_vitems set[count _vitems,_x];} foreach (vestItems player);};
+if(_backpack != "") then {{_bitems set[count _bitems,_x];} foreach (backPackItems player);};
 
-if(uniform player != "") then
+if(goggles player != "") then { _items set[count _items, goggles player]; };
+if(headgear player != "") then { _items set[count _items, headgear player]; };
+if(count (primaryWeaponMagazine player) > 0) then
 {
 	{
-		_info = [_x] call life_fnc_fetchCfgDetails;
-		if((_info select 4) in [4096,131072]) then
-		{
-			_uItems set[count _uItems,_x];
-		};
-	} foreach (uniformItems player);
+		_magazines set[count _magazines,_x];
+	} foreach (primaryWeaponMagazine player);
 };
 
-if(backpack player != "") then
+if(count (handgunMagazine player) > 0) then
 {
 	{
-		_info = [_x] call life_fnc_fetchCfgDetails;
-		if((_info select 4) in [4096,131072]) then
-		{
-			_bItems set[count _bItems,_x];
-		};
-	} foreach (backpackItems player);
+		_magazines set[count _magazines,_x];
+	} foreach (handgunMagazine player);
 };
 
-_ret set[count _ret,_uItems];
-_ret set[count _ret,_bItems];
+//Hard code for Laser Desigantor batteries
+_curWep = currentWeapon player;
+if("Laserdesignator" in assignedItems player) then
+{
+	player selectWeapon "Laserdesignator";
+	if(currentMagazine player != "") then {_magazines set[count _magazines,(currentMagazine player)];};
+};
 
-civ_gear = _ret;
+player selectWeapon _curWep;
+
+civ_gear = [_primary,_handgun,_magazines,_uniform,_vest,_backpack,_items,_primitems,_secitems,_handgunitems,_uitems,_vitems,_bitems];

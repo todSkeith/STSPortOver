@@ -79,5 +79,97 @@ class life_admin_menu {
 			w = (6.25 / 40);
 			h = (1 / 25);
 		};
+		
+		class Spectate : Life_RscButtonMenu {
+			idc = -1;
+			text = "$STR_Admin_Spectate";
+			onButtonClick = "[] call life_fnc_adminSpectate;";
+			x = 0.26 + (6.25 / 40) + (1 / 250 / (safezoneW / safezoneH));
+			y = 0.88 - (1 / 25);
+			w = (6.25 / 40);
+			h = (1 / 25);
+		};
+/*		
+		class Teleport : Life_RscButtonMenu {
+			idc = -1;
+			text = "$STR_Admin_Teleport";
+			onButtonClick = "[] call life_fnc_adminTeleport; hint 'Select where you would like to teleport';";
+			x = 0.42 + (6.25 / 40) + (1 / 250 / (safezoneW / safezoneH));
+			y = 0.88 - (1 / 25);
+			w = (6.25 / 40);
+			h = (1 / 25);
+		};
+
+		class TeleportHere : Life_RscButtonMenu {
+			idc = -1;
+			text = "$STR_Admin_TpHere";
+			onButtonClick = "[] call life_fnc_adminTpHere;";
+			x = 0.58 + (6.25 / 40) + (1 / 250 / (safezoneW / safezoneH));
+			y = 0.88 - (1 / 25);
+			w = (6.25 / 40);
+			h = (1 / 25);
+		};
+		
+		class Debug : Life_RscButtonMenu {
+			idc = -1;
+			text = "$STR_Admin_Debug";
+			onButtonClick = "[] call life_fnc_adminDebugCon;";
+			x = -0.06 + (6.25 / 40) + (1 / 250 / (safezoneW / safezoneH));
+			y = 0.885;
+			w = (6.25 / 40);
+			h = (1 / 25);
+		};
+
+		class Compensate : Life_RscButtonMenu {
+			idc = -1;
+			text = "$STR_Admin_Compensate";
+			onButtonClick = "createDialog ""Life_Admin_Compensate"";";
+			x = 0.1 + (6.25 / 40) + (1 / 250 / (safezoneW / safezoneH));
+			y = 0.885;
+			w = (6.25 / 40);
+			h = (1 / 25);
+		};
+
+		class Repair: Life_RscButtonMenu {
+			idc = -1;
+			text = "$STR_Admin_RepairBuild";
+			onButtonClick = "[] call life_fnc_adminRepairBuild;";
+			x = 0.42 + (6.25 / 40) + (1 / 250 / (safezoneW / safezoneH));
+			y = 0.885;
+			w = (6.25 / 40);
+			h = (1 / 25);
+		};
+
+		class Authenticate: Life_RscButtonMenu {
+			idc = -1;
+			text = "$STR_Admin_Authenticate";
+			onButtonClick = "[] call life_fnc_adminAuthenticate;";
+			x = 0.58 + (6.25 / 40) + (1 / 250 / (safezoneW / safezoneH));
+			y = 0.885;
+			w = (6.25 / 40);
+			h = (1 / 25);
+		};
+		
+		class CheckAuth: Life_RscButtonMenu {
+			idc = -1;
+			text = "$STR_Admin_CheckAuth";
+			onButtonClick = "[] call life_fnc_adminCheckAuth;";
+			x = 0.26 + (6.25 / 40) + (1 / 250 / (safezoneW / safezoneH));
+			y = 0.885;
+			w = (6.25 / 40);
+			h = (1 / 25);
+		};
+
+		class Ban: Life_RscButtonMenu {
+			idc = -1;
+			text = "$STR_Admin_Ban";
+			onButtonClick = "[] call life_fnc_adminBan;";
+			x = 0.26 + (6.25 / 40) + (1 / 250 / (safezoneW / safezoneH));
+			y = 0.885;
+			w = (6.25 / 40);
+			h = (1 / 25);
+		};
+*/
+
 	};
 };

@@ -39,6 +39,34 @@ switch (true) do
 	case (_item in ["storagesmall","storagebig"]): {
 		[_item] call life_fnc_storageBox;
 	};
+
+	case (_item == "chainsaw"):
+	{
+		[] spawn life_fnc_chainsaw;
+	};
+
+	case (_item == "crabpot"):
+	{
+		[] spawn life_fnc_crabpot;
+	};
+
+	case (_item == "fishing"):
+	{
+		[] spawn fnc_fishing;
+	};
+
+	case(_item ==  "crowbar"):
+	{
+			[] spawn life_fnc_crowbar;
+	};
+
+	case (_item == "lethal"):
+	{
+		if(([false,_item,1] call life_fnc_handleInv)) then
+		{
+			[] spawn life_fnc_lethal;
+		};
+	};
 	
 	case (_item == "redgull"):
 	{
@@ -87,6 +115,155 @@ switch (true) do
 		[] spawn life_fnc_pickAxeUse;
 	};
 	
+	case (_item == "heroinp"):
+	{
+		if(([false,_item,1] call life_fnc_handleInv)) then
+		{
+			[] spawn life_fnc_drugeffect_her;
+		};
+	};
+
+	case (_item == "marijuana"):
+	{
+		if(([false,_item,1] call life_fnc_handleInv)) then
+		{
+			[] spawn life_fnc_drugeffect_mar;
+		};
+	};
+
+	case (_item == "cocainep"):
+	{
+		if(([false,_item,1] call life_fnc_handleInv)) then
+		{
+			player setFatigue 0;
+			[] spawn life_fnc_drugeffect_coc;
+			[] spawn
+						{
+							life_cocaine_effect = time;
+							titleText["You can now run farther for 4 minutes","PLAIN"];
+							player enableFatigue false;
+							waitUntil {!alive player OR ((time - life_cocaine_effect) > (4 * 60))};
+							player enableFatigue true;
+						};
+		};
+	};
+	
+	case (_item == "RoadCone"):
+	{
+		if(!isNull life_roadcone) exitWith {hint "You already have a Roadcone active in deployment"};
+		//if cop override and allow use of item
+		if(playerSide == west) then {
+			if (player getVariable "unconscious") exitWith {};
+			if(([false,_item,1] call life_fnc_handleInv)) then {
+				[] spawn life_fnc_RoadCone;
+			};
+		};
+		//if civ check for rebel license otherwise deny use of item
+		if(playerSide != west) then {
+			if (player getVariable "unconscious") exitWith {};
+			if(!(license_civ_rebel)) then {hint "You need a rebel license to use this item"}
+			else {
+				if (player getVariable "unconscious") exitWith {};
+				if(([false,_item,1] call life_fnc_handleInv)) then {
+					[] spawn life_fnc_RoadCone;
+				};
+			};
+		};
+	};
+	
+	case (_item == "moonshine"):
+        {
+                if(([false,_item,1] call life_fnc_handleInv)) then
+                {
+                        [] spawn life_fnc_drugeffect_alc;
+                };
+	};
+
+	case (_item == "RoadConeStrip"):
+	{
+		if(!isNull life_roadcone) exitWith {hint "You already have a Roadcone Strip active in deployment"};
+		if (player getVariable "unconscious") exitWith {};
+		//if cop override and allow use of item
+		if(playerSide == west) then {
+			if(([false,_item,1] call life_fnc_handleInv)) then {
+				[] spawn life_fnc_RoadConeStrip;
+			};
+		};
+		//if civ check for rebel license otherwise deny use of item
+		if(playerSide != west) then {
+			if(!(license_civ_rebel)) then {hint "You need a rebel license to use this item"}
+			else {
+				if(([false,_item,1] call life_fnc_handleInv)) then {
+					[] spawn life_fnc_RoadConeStrip;
+				};
+			};
+		};
+	};
+
+	case (_item == "RoadConeB"):
+	{
+		if(!isNull life_roadcone) exitWith {hint "You already have a Blinking Roadcone active in deployment"};
+		if (player getVariable "unconscious") exitWith {};
+		//if cop override and allow use of item
+		if(playerSide == west) then {
+			if(([false,_item,1] call life_fnc_handleInv)) then {
+				[] spawn life_fnc_RoadConeB;
+			};
+		};
+		//if civ check for rebel license otherwise deny use of item
+		if(playerSide != west) then {
+			if(!(license_civ_rebel)) then {hint "You need a rebel license to use this item"};
+			if (player getVariable "unconscious") exitWith {}
+			else {
+				if(([false,_item,1] call life_fnc_handleInv)) then {
+					[] spawn life_fnc_RoadConeB;
+				};
+			};
+		};
+	};
+
+	case (_item == "RoadConeStripB"):
+	{
+		if(!isNull life_roadcone) exitWith {hint "You already have a Blinking Roadcone Strip active in deployment"};
+		if (player getVariable "unconscious") exitWith {};
+		//if cop override and allow use of item
+		if(playerSide == west) then {
+			if(([false,_item,1] call life_fnc_handleInv)) then {
+				[] spawn life_fnc_RoadConeStripB;
+			};
+		};
+		//if civ check for rebel license otherwise deny use of item
+		if(playerSide != west) then {
+			if(!(license_civ_rebel)) then {hint "You need a rebel license to use this item"}
+			else {if (player getVariable "unconscious") exitWith {};
+				if(([false,_item,1] call life_fnc_handleInv)) then {
+					[] spawn life_fnc_RoadConeStripB;
+				};
+			};
+		};
+	};
+
+	case (_item == "RoadBlockWood"):
+	{
+		if(!isNull life_roadblock) exitWith {hint "You already have a Road Block active in deployment"};
+		if (player getVariable "unconscious") exitWith {};
+		//if cop override and allow use of item
+		if(playerSide == west) then {
+			if(([false,_item,1] call life_fnc_handleInv)) then {
+				[] spawn life_fnc_RoadBlockWood;
+			};
+		};
+		//if civ check for rebel license otherwise deny use of item
+		if(playerSide != west) then {
+			if(!(license_civ_rebel)) then {hint "You need a rebel license to use this item"}
+			else {if (player getVariable "unconscious") exitWith {};
+				if(([false,_item,1] call life_fnc_handleInv)) then {
+					[] spawn life_fnc_RoadBlockWood;
+				};
+			};
+		};
+	};
+
 	default
 	{
 		hint localize "STR_ISTR_NotUsable";

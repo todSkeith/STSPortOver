@@ -28,6 +28,16 @@ life_atmcash = parseNumber (_this select 3);
 __CONST__(life_adminlevel,parseNumber(_this select 4));
 __CONST__(life_donator,0);
 
+switch(life_donator) do
+{
+	case 0: {__CONST__(life_donator_discount,1)};
+	case 1: {__CONST__(life_donator_discount,0.9)};
+	case 2: {__CONST__(life_donator_discount,0.8)};
+	case 3: {__CONST__(life_donator_discount,0.7)};
+	case 4: {__CONST__(life_donator_discount,0.6)};
+	case 5: {__CONST__(life_donator_discount,0.5)};
+};
+
 //Loop through licenses
 if(count (_this select 6) > 0) then {
 	{
