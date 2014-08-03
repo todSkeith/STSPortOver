@@ -11,7 +11,8 @@ if(_item == "") exitWith {};
 
 switch (_item) do
 {
-	case "oilu": {7};
+
+	case "oilu": {8};
 	case "oilp": {6};
 	case "heroinu": {6};
 	case "heroinp": {4};
@@ -23,7 +24,7 @@ switch (_item) do
 	case "salema": {2};
 	case "ornate": {2};
 	case "mackerel": {4};
-	case "tuna": {6};
+	case "tuna": {8};
 	case "mullet": {4};
 	case "catshark": {6};
 	case "turtle": {6};
@@ -50,11 +51,35 @@ switch (_item) do
 	case "spikeStrip": {15};
 	case "rock": {6};
 	case "cement": {5};
+	case "goldore": {5};
+	case "gold_r": {3};
 	case "goldbar": {12};
+	case "corn": {3};
+	case "moonshine": {2};
+	case "corona": {2};
+	case "landshark": {2};
+	case "coorslight": {2};
+	case "budweiser": {2};
+	case "fcrab": {2};
+	case "fcrabp": {4};
+	case "mcrabs": {2};
+	case "mcrab": {4};
+	case "crabpot": {10};
+	case "defib" : {10};
+	case "log" : {40};
+	case "lumber" : {30};
+	case "chainsaw" : {15};
+	case "RoadConeStrip": {10};
+	case "RoadCone": {2};
+	case "RoadBlockWood": {23};
+	case "coalore": {5};
+	case "steel": {5};
+	case "crowbar": {30};
+	case "storage2": {30};
+	case "storagesmall": {5};
+	case "storagebig": {10};
 	case "blastingcharge": {15};
 	case "boltcutter": {5};
 	case "defusekit": {2};
-	case "storagesmall": {5};
-	case "storagebig": {10};
 	default {1};
 };
