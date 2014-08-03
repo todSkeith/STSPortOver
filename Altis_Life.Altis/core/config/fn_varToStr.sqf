@@ -61,6 +61,28 @@ switch (_var) do
 	case "life_inv_defusekit": {(localize "STR_Item_DefuseKit")};
 	case "life_inv_storagesmall": {(localize "STR_Item_StorageBS")};
 	case "life_inv_storagebig": {(localize "STR_Item_StorageBL")};
+	case "life_inv_goldore": {"Gold Ore"};
+	case "life_inv_goldr": {"Gold Ingot"};
+    case "life_inv_crowbar": {"Crowbar"};
+    case "life_inv_lethal": {"Lethal Injection"};
+	case "life_inv_corn": {"Ears of Corn"};
+	case "life_inv_moonshine": {"Moonshine"};
+	case "life_inv_fcrab": {"Female Crab"};
+	case "life_inv_fcrabp": {"Pregnant Female Crab"};
+	case "life_inv_mcrabs": {"Male Crab Small"};
+	case "life_inv_mcrab": {"Male Crab"};
+	case "life_inv_crabpot": {"Crab Pot"};
+	case "life_inv_coalore": {"Coal"};
+	case "life_inv_steel" : {"Steel"};
+	case "life_inv_defib" : {"Defibrilator"};
+	case "life_inv_log" : {"Wood Log"};
+	case "life_inv_lumber" : {"Cut Lumber"};
+	case "life_inv_chainsaw" : {"Chainsaw"};
+	case "life_inv_cellphone" : {"Cell Phone"};
+	case "life_inv_RoadConeStrip": {"RoadCone Strip"};
+	case "life_inv_RoadCone": {"RoadCone"};
+	case "life_inv_RoadBlockWood": {"RoadBlock (Wooden)"};
+	case "life_inv_zip": {"Ziptie"};
 	
 	//License Block
 	case "license_civ_driver": {(localize "STR_License_Driver")};
@@ -85,4 +107,11 @@ switch (_var) do
 	case "license_civ_cement": {(localize "STR_License_Cement")};
 	case "license_med_air": {(localize "STR_License_Pilot")};
 	case "license_civ_home": {(localize "STR_License_Home")};
+	case "license_civ_gang": {"Gang License"};
+	case "license_civ_gold": {"Gold Processing License"};
+	case "license_civ_moonshine": {"Distillery Agreement"};
+	case "license_civ_crabbing": {"Crabbing License"};
+	case "license_civ_steel" : {"Steel Processing License"};
+	case "license_civ_bh" : {"Bounty Hunting License"};
+	case "license_civ_logging" : {"Logging License"};
 };
