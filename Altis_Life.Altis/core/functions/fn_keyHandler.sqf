@@ -110,8 +110,8 @@ switch (_code) do
 		};
 	};
 
-	//TAB key Surrender
-	case 15:
+	//2 key Surrender
+	case 3:
 	{
 		if (!_shift && !_alt && !_ctrlKey) then
 		{

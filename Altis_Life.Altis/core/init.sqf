@@ -100,3 +100,16 @@ life_fnc_moveIn = compileFinal
 [] execVM "core\init_survival.sqf";
 
 __CONST__(life_paycheck,life_paycheck); //Make the paycheck static.
+
+player addEventHandler ["InventoryOpened", 
+{
+   _result = false;
+   _container = _this select 1;
+   _lk = locked _container;
+   _lk_var = _container getVariable ["isLocked", false];
+   if(_lk > 1 || _lk_var) then {
+      hint "Inventory Locked";
+      _result = true;
+   };
+   _result 
+}];
