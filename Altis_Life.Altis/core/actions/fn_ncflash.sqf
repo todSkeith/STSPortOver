@@ -19,7 +19,7 @@ while {strobe1} do
 {
 	if (!(_vehicle getVariable "flashing")) exitWith {};
 	
-	sleep 0.09;
+	sleep 0.01;
 	_pos setVariable["#lightpoint",FALSE,TRUE] spawn BIS_FNC_MP;
 	_pos = lightsource6;
 	flash = createVehicle ["#lightpoint", getPos _pos, [], 0, "CAN_COLLIDE"];

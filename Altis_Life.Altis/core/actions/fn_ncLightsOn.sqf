@@ -96,7 +96,7 @@ if (sunOrMoon < 1) then {
 	_lumens = 5;
 };
 
-_offset = 0.45; //seconds between
+_offset = 0.15; //seconds between
 //L, Up, Fw, Up, R, Up, Bk, Up
 while {(alive _obj)} do
  {
