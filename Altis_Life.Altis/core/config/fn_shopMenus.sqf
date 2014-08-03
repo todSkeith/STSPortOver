@@ -57,11 +57,6 @@ switch (_shop) do
 		ctrlShow[2513,false];
 	};
 	
-	case "donator":
-	{
-		ctrlSetText[2505,"Donator Shop"];
-	};
-	
 	case "sergeant":
 	{
 		ctrlSetText[2505,"Sergeants Shop"];
