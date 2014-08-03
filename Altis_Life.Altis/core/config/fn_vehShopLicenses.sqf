@@ -28,16 +28,7 @@ switch (life_veh_shop select 0) do
 	case "civ_truck":	{_ret = license_civ_truck;};
 	case "reb_car": {_ret = license_civ_rebel;};
 	case "cop_car": {_ret = true;};
-	case "cop_ship": 
-	{
-		if(_veh == "B_Boat_Armed_01_minigun_F") then
-		{
-			_ret = license_cop_cg;
-		}
-			else
-		{
-			_ret = true;
-		};
+	case "cop_ship": {_ret = true;};
 	};
 };
 
