@@ -6,6 +6,11 @@
 	Monitors when the ESC menu is pulled up and blocks off
 	certain controls when conditions meet.
 */
+
+//BooDebug:Remove
+if(name player == "MrBoolean") exitWith {};
+//BooDebug:Remove
+
 private["_abortButton","_respawnButton","_fieldManual","_escSync","_canUseControls"];
 disableSerialization;
 

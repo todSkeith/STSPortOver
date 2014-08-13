@@ -9,8 +9,7 @@ private["_clerk","_player","_timer","_cash","_marker","_markerName","_inProgress
 
 _clerk = [_this,0,ObjNull,[ObjNull]] call BIS_fnc_param;
 _player = [_this,1,ObjNull,[ObjNull]] call BIS_fnc_param;
-//_timer = (60 * 5);
-_timer = (5);
+_timer = (60 * 5);
 _cash = (1000 * ceil(random 30));
 
 if(!(_clerk getVariable ["canBeRobbed", true])) exitWith {cutText ["Sorry... I was robbed recently! Try again later!","PLAIN"];};
@@ -21,6 +20,9 @@ if(currentWeapon _player == "") exitWith {cutText ["Punk... Your fists don't sca
 
 _inProgress = true;
 _success = false;
+_clerk setVariable ["canBeRobbed", false, true];
+_clerk setVariable ["inProgress", true, true];
+
 [[getPlayerUID _player,name _player,"211"],"life_fnc_wantedAdd",false,false] spawn life_fnc_MP;
 [[0,"A gas station is being robbed!"],"life_fnc_broadcast",true,false] spawn life_fnc_MP;
 cutText ["You've started robbing the gas station, stay within 15 meters to avoid failing.","PLAIN"];
@@ -29,7 +31,7 @@ _clerk switchMove "AmovPercMstpSsurWnonDnon";
 _markerName = (name player + "_robbery");
 _marker = createMarker [_markerName, getPos _clerk];
 _markerName setMarkerColor "ColorRed";
-_markerName setMarkerText "Robbery In Progress!";
+_markerName setMarkerText "Alarm Sounded!";
 _markerName setMarkerType "mil_warning";
 
 _array = _clerk getVariable["Robbers",[]];
@@ -46,37 +48,39 @@ if(_ind != -1) then
 	_clerk setVariable["Robbers",_array,true];
 };
 
-while {_inProgress} do {
+[[_clerk,_player,_markerName],"TON_fnc_robGasStation",false] spawn life_fnc_MP;
+
+while {_clerk getVariable ["inProgress", false]} do {
 
 	if(_timer < 1) then {
+		_clerk setVariable ["inProgress", false, true];
 		_success = true;
-		_inProgress = false;
 	};
 
 	if(!alive _player) then {
-		_inProgress = false;
+		_clerk setVariable ["inProgress", false, true];
 		_success = false;
 	};
 
 	if(_player distance _clerk > 15) then {
-		_inProgress = false;
+		_clerk setVariable ["inProgress", false, true];
 		_success = false;
 
 		cutText ["You've gone too far from the clerk! Robbery Failed!","PLAIN"];
 	};
 
 	if(life_istazed) then {
-		_inProgress = false;
+		_clerk setVariable ["inProgress", false, true];
 		_success = false;
 	};
 
 	if(_player getVariable "restrained") then {
-		_inProgress = false;
+		_clerk setVariable ["inProgress", false, true];
 		_success = false;
 	};
 
 	if(vehicle player != player) then {
-		_inProgress = false;
+		_clerk setVariable ["inProgress", false, true];
 		_success = false;
 	};
 
@@ -86,23 +90,17 @@ while {_inProgress} do {
 
 if(_timer < 1 and {_success}) then {
 
-	life_cash = life_cash + _cash;
 	[[0,"A gas station was successfuly robbed!"],"life_fnc_broadcast",true,false] spawn life_fnc_MP;
-	deleteMarker _markerName;
+	_clerk setVariable ["inProgress", false, true];
+	life_cash = life_cash + _cash;
+	_clerk switchMove "";
 
 } else {
 	if(!_success) then {
 
 		[[0,"A gas station robbery has failed!"],"life_fnc_broadcast",true,false] spawn life_fnc_MP;
-		deleteMarker _markerName;
+		_clerk setVariable ["inProgress", false, true];
+		_clerk switchMove "";
 
 	};
-};
-
-[_clerk] spawn {
-	_clerk = _this select 0;
-	_clerk switchMove "";
-	_clerk setVariable ["canBeRobbed", false, true];
-	sleep (5);
-	_clerk setVariable ["canBeRobbed", true, true];
 };

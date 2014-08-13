@@ -31,6 +31,7 @@ switch (_state) do
 	//Remove motor vehicle licenses
 	case 2:
 	{
+		/*
 		if(license_civ_driver OR license_civ_air OR license_civ_truck OR license_civ_boat) then {
 			license_civ_driver = false;
 			license_civ_air = false;
@@ -38,6 +39,8 @@ switch (_state) do
 			license_civ_boat = false;
 			hint localize "STR_Civ_LicenseRemove_1";
 		};
+		*/
+		hint localize "Watch where you're going!";
 	};
 	
 	//Killing someone while owning a gun license

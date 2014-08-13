@@ -125,7 +125,7 @@ switch (_code) do
 			_handled = true;
 		};
 	};
-	
+
 	//Knock out, this is experimental and yeah...
 	case 34:
 	{
@@ -138,8 +138,6 @@ switch (_code) do
 			};
 		};
 	};
-
-
 
 	// O Key, police gate opener
 	case 24:
