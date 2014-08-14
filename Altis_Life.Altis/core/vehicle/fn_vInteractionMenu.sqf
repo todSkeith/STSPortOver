@@ -12,6 +12,7 @@
 #define Btn5 37454
 #define Btn6 37455
 #define Title 37401
+
 private["_display","_curTarget","_Btn1","_Btn2","_Btn3","_Btn4","_Btn5","_Btn6"];
 if(!dialog) then {
 	createDialog "vInteraction_Menu";
@@ -47,9 +48,6 @@ if(playerSide == west) then {
 	_Btn4 buttonSetAction "[life_vInact_curTarget] spawn life_fnc_pulloutAction;";
 	if(count crew _curTarget == 0) then {_Btn4 ctrlEnable false;};
 	
-	_Btn5 ctrlSetText localize "STR_vInAct_Impound";
-	_Btn5 buttonSetAction "[life_vInact_curTarget] spawn life_fnc_impoundAction;";
-	
 	if(_curTarget isKindOf "Ship") then {
 		_Btn6 ctrlSetText localize "STR_vInAct_PushBoat";
 		_Btn6 buttonSetAction "[] spawn life_fnc_pushObject; closeDialog 0;";
@@ -84,19 +82,29 @@ if(playerSide == west) then {
 		};
 	};
 	
+	//Button 3: Pull out of Vehicle
+	if(playerSide == civilian && primaryWeapon player == "" && handGunWeapon player == "") then {_Btn3 ctrlEnable false;};
+	if(count crew _curTarget == 0) then {_Btn3 ctrlEnable false;};
+	_Btn3 ctrlSetText localize "STR_vInAct_PullOut";
+	_Btn3 buttonSetAction "[life_vInact_curTarget] spawn life_fnc_pulloutAction;";
+	
 	if(typeOf _curTarget == "O_Truck_03_device_F") then {
-		_Btn3 ctrlSetText localize "STR_vInAct_DeviceMine";
-		_Btn3 buttonSetAction "[life_vInact_curTarget] spawn life_fnc_deviceMine";
+		_Btn4 ctrlSetText localize "STR_vInAct_DeviceMine";
+		_Btn4 buttonSetAction "[life_vInact_curTarget] spawn life_fnc_deviceMine";
 		if(!isNil {(_curTarget getVariable "mining")} OR !local _curTarget && {_curTarget in life_vehicles}) then {
-			_Btn3 ctrlEnable false;
+			_Btn4 ctrlEnable false;
 		} else {
-			_Btn3 ctrlEnable true;
+			_Btn4 ctrlEnable true;
 		};
 	} else {
-		_Btn3 ctrlShow false;
+		_Btn4 ctrlShow false;
 	};
-	
-	_Btn4 ctrlShow false;
+
 	_Btn5 ctrlShow false;
 	_Btn6 ctrlShow false;
+};
+
+if(playerSide == west or playerSide == independent) then {
+	_Btn5 ctrlSetText localize "STR_vInAct_Impound";
+	_Btn5 buttonSetAction "[life_vInact_curTarget] spawn life_fnc_impoundAction;";
 };

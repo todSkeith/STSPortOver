@@ -260,7 +260,6 @@ class Life_Client_Core
 		class unconsciousMarker {};
 		class autoSave {};
 		class updateCash {};
-        class vehicleGarage {};
 		class unconscious {};
 		class enablecollisionwith {};
 		class disablecollisionwith {};
