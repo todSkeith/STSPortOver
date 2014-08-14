@@ -67,14 +67,18 @@ switch (_shop) do
 	{
 		_return =
 		[
-			["B_Quadbike_01_F",500],
-			["C_Offroad_01_F",2500],
-			["C_SUV_01_F",20000],
-			["C_Van_01_Fuel_F",7500],
-			["B_Truck_01_box_F",250000],
-			["C_Hatchback_01_sport_F",50000],
-			["I_Heli_Transport_02_F",1200000]
+			["B_Quadbike_01_F",2500],
+			["B_G_Offroad_01_F",15000],
+			["B_Heli_Light_01_F",325000]
 		];
+
+		if(license_civ_rebel) then
+		{
+			//_return set[count _return,
+			//["O_MRAP_02_F",175000]];
+			_return set[count _return,
+			["B_G_Offroad_01_armed_F",750000]];
+		};
 	};
 
 	case "reb_air":
