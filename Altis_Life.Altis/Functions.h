@@ -25,6 +25,7 @@ class Life_Client_Core
 		class initCop {};
 		class initMedic {};
 		class welcomeNotification {};
+		class nosidechat {};
 	};
 	
 	class Admin
@@ -423,7 +424,6 @@ class Life_Client_Core
 		class blastingCharge {};
 		class defuseKit {};
 		class storageBox {};
-		class crowbar {};
 		class zipTie {};
 		class crabpot {};
 		class chainsaw {};

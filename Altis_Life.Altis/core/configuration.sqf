@@ -222,7 +222,6 @@ life_inv_items =
 	"life_inv_RoadBlockWood",
 	"life_inv_storage1",
     "life_inv_storage2",
-    "life_inv_crowbar",
     "life_inv_lethal"
 ];
 
@@ -384,7 +383,6 @@ buy_array =
 	["RoadBlockWood",1500],
 	["moonshine", 950],
     ["storage2",100000],
-    ["crowbar", 15000],
     ["lethal", 55000]
 ];
 __CONST__(buy_array,buy_array);

@@ -63,7 +63,6 @@ switch (_var) do
 	case "life_inv_storagebig": {(localize "STR_Item_StorageBL")};
 	case "life_inv_goldore": {"Gold Ore"};
 	case "life_inv_goldr": {"Gold Ingot"};
-    case "life_inv_crowbar": {"Crowbar"};
     case "life_inv_lethal": {"Lethal Injection"};
 	case "life_inv_corn": {"Ears of Corn"};
 	case "life_inv_moonshine": {"Moonshine"};
