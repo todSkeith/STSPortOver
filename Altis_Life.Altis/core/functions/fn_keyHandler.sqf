@@ -177,17 +177,23 @@ switch (_code) do
 	{
 		//If cop run checks for turning lights on.
 		if(_shift && playerSide == west) then {
-			if(vehicle player != player && (typeOf vehicle player) in ["C_Offroad_01_F","B_MRAP_01_F","C_SUV_01_F","C_Hatchback_01_F","C_Hatchback_01_sport_F"]) then {
+			if(vehicle player != player) then {
 				if(!isNil {vehicle player getVariable "lights"}) then {
 					[vehicle player] call life_fnc_sirenLights;
+					_handled = true;
+				} else {
+					vehicle player setVariable ["lights", false, true];
 					_handled = true;
 				};
 			};
 		};
 		if(_shift && playerSide == independent) then {
-			if(vehicle player != player && (typeOf vehicle player) in ["C_Offroad_01_F","B_MRAP_01_F","C_SUV_01_F","C_Hatchback_01_F","C_Hatchback_01_sport_F"]) then {
+			if(vehicle player != player) then {
 				if(!isNil {vehicle player getVariable "lights"}) then {
 					[vehicle player] call life_fnc_medicSirenLights;
+					_handled = true;
+				}else{
+					vehicle player setVariable ["lights", false, true];
 					_handled = true;
 				};
 			};

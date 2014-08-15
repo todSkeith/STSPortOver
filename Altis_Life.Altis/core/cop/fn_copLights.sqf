@@ -33,7 +33,19 @@ switch (typeOf _vehicle) do
 	
 	case "C_SUV_01_F":
 	{
-		_lightleft lightAttachObject [_vehicle, [-0.37,-1.2,0.42]];
+		_lightleft lightAttachObject [_vehicle, [-0.4, 2.3, -0.55]];
+	};
+
+	case "C_Hatchback_01_F": {
+		_lightleft lightAttachObject [_vehicle, [-0.6, 2, -0.95]];
+	};
+
+	case "B_MRAP_01_F": {
+		_lightleft lightAttachObject [_vehicle, [-1, -0.75, 0.55]];
+	};
+
+	case "C_Hatchback_01_sport_F": {
+		_lightleft lightAttachObject [_vehicle, [-0.6, 2, -0.95]];
 	};
 };
 
@@ -63,8 +75,22 @@ switch (typeOf _vehicle) do
 	
 	case "C_SUV_01_F":
 	{
-		_lightright lightAttachObject [_vehicle, [0.37,-1.2,0.42]];
+		_lightright lightAttachObject [_vehicle, [0.4, 2.3, -0.52]];
 	};
+
+	case "C_Hatchback_01_F": {
+		_lightright lightAttachObject [_vehicle, [0.6, 2, -0.95]];
+	};
+
+	case "B_MRAP_01_F": {
+		_lightright lightAttachObject [_vehicle, [1, -0.75, 0.55]];
+	};
+
+	case "C_Hatchback_01_sport_F": {
+		_lightright lightAttachObject [_vehicle, [0.6, 2, -0.95]];
+	};
+
+
 };
   
 _lightright setLightAttenuation [0.181, 0, 1000, 130]; 

@@ -466,6 +466,7 @@ life_garage_prices =
 	["B_Boat_Armed_01_minigun_F",16500],
 	["B_SDV_01_F",25000],
 	["B_MRAP_01_F",7500],	
+	["B_MRAP_01_F",7500]
 ];
 
 if(playerSide == independent) then 
@@ -483,9 +484,9 @@ __CONST__(life_garage_prices,life_garage_prices);
 
 life_garage_sell =
 [
-	["B_Quadbike_01_F",450],
+	["B_Quadbike_01_F",950],
 	["C_Hatchback_01_F",4500],
-	["C_Offroad_01_F", 1500],
+	["C_Offroad_01_F", 6500],
 	["B_G_Offroad_01_F",3500],
 	["C_SUV_01_F",15000],
 	["C_Van_01_transport_F",25000],
@@ -506,6 +507,9 @@ life_garage_sell =
 	["C_Boat_Civil_01_police_F",4950],
 	["B_Boat_Armed_01_minigun_F",21000],
 	["B_SDV_01_F",45000],
+	["B_MRAP_01_F",10000],
+	["B_Quadbike_01_F",450],
+	["C_Offroad_01_F", 1500],
 	["B_MRAP_01_F",10000]
 ];
 __CONST__(life_garage_sell,life_garage_sell);

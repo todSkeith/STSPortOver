@@ -1,81 +1,74 @@
-/*
-	File: fn_copLights.sqf
-	Author: mindstorm, modified by Adanteh
-	Link: http://forums.bistudio.com/showthread.php?157474-Offroad-Police-sirens-lights-and-underglow
-	
-	Description:
-	Adds the light effect to cop vehicles, specifically the offroad.
-*/
-Private ["_vehicle","_lightRed","_lightBlue","_lightleft","_lightright","_leftRed"];
+//////////////////////////////////////////////////////////////////
+// Created by: BWG_Joe and Adapted by STS Dev Team
+// Function Name: life_fnc_coplights.sqf
+// Description: Sets the lights for police vehicles.
+//////////////////////////////////////////////////////////////////
+
+private ["_vehicle","_lightRd","_lightB","_lightL","_lightR","_leftRed","_lumens","_attach"];
+
 _vehicle = _this select 0;
-	
-if(isNil "_vehicle" OR isNull _vehicle OR !(_vehicle getVariable "lights")) exitWith {};
-_lightRed = [0.1, 0.1, 20];
-_lightBlue = [0.1, 0.1, 20];
-
-_lightleft = "#lightpoint" createVehicle getpos _vehicle;   
-sleep 0.2;
-_lightleft setLightColor _lightRed; 
-_lightleft setLightBrightness 0.2;  
-_lightleft setLightAmbient [0.1,0.1,1];
+if (isNil "_vehicle" || isNull _vehicle || !(_vehicle getVariable "lights")) exitWith {};
 
 switch (typeOf _vehicle) do
 {
-	case "C_Offroad_01_F":
-	{
-		_lightleft lightAttachObject [_vehicle, [-0.37, 0.0, 0.56]];
-	};
+	case "C_Hatchback_01_F": { _attach = [[-0.6, 2, -0.95], [0.6, 2, -0.95]]; };
+	case "C_Offroad_01_F": { _attach = [[-0.37, 0.0, 0.56], [0.37, 0.0, 0.56]]; };
+	case "C_SUV_01_F": { _attach = [[-0.4, 2.3, -0.55], [0.4, 2.3, -0.52]]; };
 };
 
-_lightleft setLightAttenuation [0.181, 0, 1000, 130]; 
-_lightleft setLightIntensity 10;
-_lightleft setLightFlareSize 0.38;
-_lightleft setLightFlareMaxDistance 150;
-_lightleft setLightUseFlare true;
+_lightRd = [20, 0.5, 0.5];
+_lightB = [1, 1, 1];
 
-_lightright = "#lightpoint" createVehicle getpos _vehicle;   
+_lightL = createVehicle ["#lightpoint", getPos _vehicle, [], 0, "CAN_COLLIDE"];
 sleep 0.2;
-_lightright setLightColor _lightBlue; 
-_lightright setLightBrightness 0.2;  
-_lightright setLightAmbient [0.1,0.1,1]; 
+_lightL setLightColor _lightRd;
+_lightL setLightBrightness 0;
+_lightL lightAttachObject [_vehicle, _attach select 0];
+_lightL setLightAttenuation [0.181, 0, 1000, 130];
+_lightL setLightIntensity 10;
+_lightL setLightFlareSize 0.38;
+_lightL setLightFlareMaxDistance 150;
+_lightL setLightUseFlare true;
+_lightL setLightDayLight true;
+_lightL setLightAmbient [0.1,0.1,1];
 
-switch (typeOf _vehicle) do
-{
-	case "C_Offroad_01_F":
-	{
-		_lightright lightAttachObject [_vehicle, [0.37, 0.0, 0.56]];
-	};
+_lightR = createVehicle ["#lightpoint", getPos _vehicle, [], 0, "CAN_COLLIDE"];
+sleep 0.2;
+_lightR setLightColor _lightB;
+_lightR setLightBrightness 0;
+_lightR lightAttachObject [_vehicle, _attach select 1];
+_lightR setLightAttenuation [0.181, 0, 1000, 130];
+_lightR setLightIntensity 10;
+_lightR setLightFlareSize 0.38;
+_lightR setLightFlareMaxDistance 150;
+_lightR setLightUseFlare true;
+_lightR setLightDayLight true;
+_lightR setLightAmbient [0.1,0.1,1];
+
+if (sunOrMoon < 1) then {
+	_lumens = 10;
+} else {
+	_lumens = 50;
 };
-  
-_lightright setLightAttenuation [0.181, 0, 1000, 130]; 
-_lightright setLightIntensity 10;
-_lightright setLightFlareSize 0.38;
-_lightright setLightFlareMaxDistance 150;
-_lightright setLightUseFlare true;
 
-//ARE YOU ALL HAPPY?!?!?!?!?!?!?!?!?%#?@WGD?TGD?BN?ZDHBFD?GA
-_lightleft setLightDayLight true;
-_lightright setLightDayLight true;
+_leftRed = true;
+while {(alive _vehicle)} do
+ {
+	if (!(_vehicle getVariable "lights")) exitWith {};
+		if ((_leftRed)) then
+			{
+			_leftRed = false;
+			_lightR setLightBrightness 0;
+			sleep 0.03;
+			_lightL setLightBrightness _lumens;  }
+		 else {
+		_leftRed = true;
+		_lightL setLightBrightness 0;
+		sleep 0.03;
+		_lightR setLightBrightness _lumens;
+	};
 
-_leftRed = true;  
-while{ (alive _vehicle)} do  
-{  
-	if(!(_vehicle getVariable "lights")) exitWith {};
-	if(_leftRed) then  
-	{  
-		_leftRed = false;  
-		_lightright setLightBrightness 0.0;  
-		sleep 0.05;
-		_lightleft setLightBrightness 6;  
-	}  
-		else  
-	{  
-		_leftRed = true;  
-		_lightleft setLightBrightness 0.0;  
-		sleep 0.05;
-		_lightright setLightBrightness 6;  
-	};  
-	sleep (_this select 1);  
-};  
-deleteVehicle _lightleft;
-deleteVehicle _lightright;
+	sleep 0.25;
+};
+deleteVehicle _lightL;
+deleteVehicle _lightR;

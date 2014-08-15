@@ -12,7 +12,20 @@ if(isNil "life_boltcutter_uses") then {life_boltcutter_uses = 0;};
 if((nearestObject [[16019.5,16952.9,0],"Land_Dome_Big_F"]) == _building OR (nearestObject [[16019.5,16952.9,0],"Land_Research_house_V1_F"]) == _building) then {
 	[[[1,2],localize "STR_ISTR_Bolt_AlertFed"],"life_fnc_broadcast",true,false] spawn life_fnc_MP;
 } else {
-	[[0,format[localize "STR_ISTR_Bolt_AlertHouse",profileName]],"life_fnc_broadcast",true,false] spawn life_fnc_MP;
+
+	if(jailBuilding == _building) then {
+		[[[1,2],"Someone is breaking into the jail!"],"life_fnc_broadcast",true,false] spawn life_fnc_MP;
+		[] spawn {
+			sleep 120;
+			jailBuilding animate ["door_1_rot", 0]; 
+			jailBuilding animate ["door_2_rot", 0];
+			((nearestobjects [jailBuilding, ["Land_Research_HQ_F"], 20]) select 0) setVariable ['bis_disabled_Door_1',1,true];
+			((nearestobjects [jailBuilding, ["Land_Research_HQ_F"], 20]) select 0) setVariable ['bis_disabled_Door_2',1,true];
+			hint "locked";
+		};
+	} else {
+		[[0,format[localize "STR_ISTR_Bolt_AlertHouse",profileName]],"life_fnc_broadcast",true,false] spawn life_fnc_MP;
+	};
 };
 
 _doors = 1;
