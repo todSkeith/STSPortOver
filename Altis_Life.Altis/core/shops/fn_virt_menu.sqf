@@ -1,3 +1,4 @@
+#include <macro.h>
 /*
 	File: fn_virt_menu.sqf
 	Author: Bryan "Tonic" Boardwine

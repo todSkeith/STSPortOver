@@ -13,7 +13,7 @@ switch (_state) do
 	//Death while being wanted
 	case 0:
 	{
-		license_civ_rebel = false;
+		//license_civ_rebel = false;
 		license_civ_driver = false;
 		license_civ_heroin = false;
 		license_civ_marijuana = false;
@@ -23,9 +23,9 @@ switch (_state) do
 	//Jail licenses
 	case 1:
 	{
-		license_civ_gun = false;
-		license_civ_rebel = false;
-		license_civ_driver = false;
+		//license_civ_gun = false;
+		//license_civ_rebel = false;
+		//license_civ_driver = false;
 	};
 	
 	//Remove motor vehicle licenses
@@ -40,7 +40,6 @@ switch (_state) do
 			hint localize "STR_Civ_LicenseRemove_1";
 		};
 		*/
-		hint localize "Watch where you're going!";
 	};
 	
 	//Killing someone while owning a gun license

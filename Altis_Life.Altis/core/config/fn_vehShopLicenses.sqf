@@ -7,6 +7,7 @@
 	
 	Returns:
 	TRUE if they have the license or are allowed to get that specific vehicle without having that license.
+	TRUE if they have the license or are allowed to get that specific vehicle without having that license.
 	FALSE if they don't have the license or are not allowed to obtain that vehicle.
 */
 private["_veh","_ret"];

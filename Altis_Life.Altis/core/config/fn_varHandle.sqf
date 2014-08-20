@@ -84,6 +84,7 @@ switch (_mode) do
 			case "cellphone" : {"life_inv_cellphone"};
 			case "RoadConeStrip": {"life_inv_RoadConeStrip"};
 			case "RoadBlockWood": {"life_inv_RoadBlockWood"};
+            case "crowbar": {"life_inv_crowbar"};
             case "lethal": {"life_inv_lethal"};
 		};
 	};
@@ -143,6 +144,7 @@ switch (_mode) do
 			case "life_inv_defusekit": {"defusekit"};
 			case "life_inv_storagesmall": {"storagesmall"};
 			case "life_inv_storagebig": {"storagebig"};
+            case "life_inv_crowbar": {"crowbar"};
 			case "life_inv_lethal": {"lethal"};
 			case "life_inv_lumber" : {"lumber"};
 			case "life_inv_chainsaw" : {"chainsaw"};

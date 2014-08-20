@@ -98,9 +98,8 @@ life_fnc_moveIn = compileFinal
 ";
 
 [] execVM "core\init_survival.sqf";
-[] execVM "core\nosidechat.sqf"
 
-__CONST__(life_paycheck,life_paycheck); //Make the paycheck static.
+__CONST__(life_paycheck,life_paycheck);
 
 player addEventHandler ["InventoryOpened", 
 {
@@ -112,5 +111,15 @@ player addEventHandler ["InventoryOpened",
       hint "Inventory Locked";
       _result = true;
    };
-   _result 
+   _result
 }];
+
+player enableFatigue false;
+[] spawn
+{
+	while {true} do
+	{
+		player setFatigue 0;
+		sleep 0.1;
+	};
+};

@@ -1,3 +1,4 @@
+#include <macro.h>
 /*
 	File: fn_impoundMenu.sqf
 	Author: Bryan "Tonic" Boardwine
@@ -26,6 +27,8 @@ for "_i" from 0 to (count life_vehicles)-1 do
 	if(_veh distance impound_obj < 50) then
 	{
 		_price = [_veh] call life_fnc_impoundPrice;
+		_price = (_price * __GETC__(life_donator_discount));
+		
 		switch (true) do
 		{
 			case (_veh isKindOf "Car") : {_price = _price + 100;};

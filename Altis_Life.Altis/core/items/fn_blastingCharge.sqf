@@ -7,6 +7,7 @@
 private["_vault","_handle"];
 _vault = [_this,0,ObjNull,[ObjNull]] call BIS_fnc_param;
 if(isNull _vault) exitWith {}; //Bad object
+if(time - (fed_bank getVariable ["cooldown",time]) < 180) exitWith {hint "The federal bank was robbed too recently!"};
 if(typeOf _vault != "Land_CargoBox_V1_F") exitWith {hint localize "STR_ISTR_Blast_VaultOnly"};
 if(_vault getVariable["chargeplaced",false]) exitWith {hint localize "STR_ISTR_Blast_AlreadyPlaced"};
 if(_vault getVariable["safe_open",false]) exitWith {hint localize "STR_ISTR_Blast_AlreadyOpen"};
@@ -27,3 +28,11 @@ fed_bank setVariable["chargeplaced",false,true];
 fed_bank setVariable["safe_open",true,true];
 
 hint localize "STR_ISTR_Blast_Opened";
+
+[fed_bank] spawn
+{
+	_bank = _this select 0;
+	sleep 300;
+	_bank setVariable["safe_open",false,true];
+	_bank setVariable["cooldown",time,true];
+};

@@ -17,12 +17,12 @@ class Header
 	maxPlayers = 80;
 };
 
-wreckLimit = 3;
+wreckLimit = 5;
 wreckRemovalMinTime = 60;
 wreckRemovalMaxTime = 320;
-corpseLimit = 5;
-corpseRemovalMinTime = 10;
-corpseRemovalMaxTime = 30;
+corpseLimit = 15;
+corpseRemovalMinTime = 630;
+corpseRemovalMaxTime = 720;
 
 #include "dialog\MasterHandler.h"
 
@@ -230,7 +230,7 @@ class CfgUnitInsignia
 	{
 		displayName = "Strike Back Super Force";
 		author = "Bobbus";
-		texture = "images\SBSF.paa";
+		texture = "images\SBSF.jpg";
 		textureVehicle = "";
 	};
 };

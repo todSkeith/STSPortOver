@@ -1,3 +1,4 @@
+#include <macro.h>
 /*
 	File: fn_buyClothes.sqf
 	Author: Bryan "Tonic" Boardwine
@@ -15,6 +16,8 @@ _price = 0;
 		_price = _price + _x;
 	};
 } foreach life_clothing_purchase;
+
+_price = (_price * __GETC__(life_donator_discount));
 
 if(_price > life_cash) exitWith {titleText[localize "STR_Shop_NotEnoughClothes","PLAIN"];};
 life_cash = life_cash - _price;

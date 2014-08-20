@@ -1,3 +1,4 @@
+#include <macro.h>
 /*
 	File: fn_vehicleShopMenu.sqf
 	Author: Bryan "Tonic" Boardwine
@@ -41,6 +42,7 @@ ctrlShow [2304,false];
 {
 	_className = _x select 0;
 	_basePrice = _x select 1;
+	_basePrice = (_basePrice * __GETC__(life_donator_discount));
 	
 	_vehicleInfo = [_className] call life_fnc_fetchVehInfo;
 	_control lbAdd (_vehicleInfo select 3);

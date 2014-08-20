@@ -23,6 +23,7 @@ if((uiNamespace getVariable["Weapon_Shop_Filter",0]) == 1) then
 		else
 	{
 		_price = (__GETC__(life_weapon_shop_array) select _iS) select 1;
+		_price = (_price * __GETC__(life_donator_discount));
 	};
 	_priceTag ctrlSetStructuredText parseText format ["<t size='0.8'>Price: <t color='#8cff9b'>$%1</t></t>",[(_price)] call life_fnc_numberText];
 	_control lbSetValue[_index,_price];
@@ -30,6 +31,7 @@ if((uiNamespace getVariable["Weapon_Shop_Filter",0]) == 1) then
 	else
 {
 	_price = _control lbValue _index;
+		_price = (_price * __GETC__(life_donator_discount));
 	if(_price > life_cash) then
 	{
 		_priceTag ctrlSetStructuredText parseText format ["<t size='0.8'>Price: <t color='#ff0000'>$%1</t><br/>You lack: <t color='#8cff9b'>$%2</t></t>",[(_price)] call life_fnc_numberText,[(_price - life_cash)] call life_fnc_numberText];

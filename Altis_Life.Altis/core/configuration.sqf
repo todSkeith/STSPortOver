@@ -48,11 +48,12 @@ life_roadblock = ObjNull;
 life_roadcone = ObjNull;
 life_isUnconscious = false;
 life_god = false;
+life_reviving = false;
 holstered = false;
 
 //Revive constant variables.
-__CONST__(life_revive_cops,TRUE); //Set to false if you don't want cops to be able to revive downed players.
-__CONST__(life_revive_fee,250); //Fee for players to pay when revived.
+__CONST__(life_revive_cops,FALSE); //Set to false if you don't want cops to be able to revive downed players.
+__CONST__(life_revive_fee,1000); //Fee for players to pay when revived.
 
 //House Limit
 __CONST__(life_houseLimit,5); //Maximum amount of houses a player can buy (TODO: Make Tiered licenses).
@@ -96,6 +97,7 @@ life_eat_donuts = 30;
 *****************************
 */
 life_net_dropped = false;
+life_request_timer = false;
 life_hit_explosive = false;
 life_siren_active = false;
 life_bank_fail = false;
@@ -121,29 +123,31 @@ life_impound_air = 850;
 
 life_vehicles = [];
 bank_robber = [];
+
 switch (playerSide) do
 {
-	case west: 
+	case west:
 	{
-		life_atmcash = 7000; //Starting Bank Money
+		life_atmcash = 35000; //Starting Bank Money
 		life_paycheck = 500; //Paycheck Amount
 	};
-	case civilian: 
+	case civilian:
 	{
-		life_atmcash = 3000; //Starting Bank Money
+		life_atmcash = 35000; //Starting Bank Money
 		life_paycheck = 350; //Paycheck Amount
+		life_rent = 15000;
 	};
-	
-	case independent: {
-		life_atmcash = 6500;
-		life_paycheck = 450;
-	};
+	case independent:
+	{
+		life_atmcash = 35000; //Starting Bank Money
+		life_paycheck = 1000; //Paycheck Amount
+	}
 };
 
 /*
 	Master Array of items?
 */
-life_vShop_rentalOnly = ["B_MRAP_01_hmg_F","B_G_Offroad_01_armed_F"];
+life_vShop_rentalOnly = ["B_MRAP_01_hmg_F","B_G_Offroad_01_armed_F","I_G_Offroad_01_armed_F","O_MRAP_02_F"];
 __CONST__(life_vShop_rentalOnly,life_vShop_rentalOnly); //These vehicles can never be bought and only 'rented'. Used as a balancer & money sink. If you want your server to be chaotic then fine.. Remove it..
 
 life_inv_items = 
@@ -222,6 +226,7 @@ life_inv_items =
 	"life_inv_RoadBlockWood",
 	"life_inv_storage1",
     "life_inv_storage2",
+    "life_inv_crowbar",
     "life_inv_lethal"
 ];
 
@@ -310,6 +315,7 @@ sell_array =
 	["marijuana",650],
 	["tbacon",25],
 	["lockpick",250],
+	["zip",300],
 	["pickaxe",750],
 	["redgull",200],
 	["peach",24],
@@ -319,14 +325,13 @@ sell_array =
 	["diamondc",1750],
 	["iron_r",1500],
 	["copper_r",700],
+	["gold_r",2000],
 	["salt_r",725],
 	["glass",900],
 	["fuelF",500],
 	["spikeStrip",1200],
-	["cement",1450],
-	["goldbar",95000],
-	["zip",300],
 	["moonshine",750],
+	["cement",1450],
 	["fcrab",400],
 	["mcrab",700],
 	["fcrabp",2000],
@@ -336,6 +341,7 @@ sell_array =
 	["RoadConeStrip",500],
 	["RoadCone",75],
 	["RoadBlockWood",750],
+	["goldbar",50000],
 	["lethal", 15000]
 ];
 __CONST__(sell_array,sell_array);
@@ -347,16 +353,16 @@ buy_array =
 	["salema",55],
 	["ornate",50],
 	["mackerel",200],
-	["tuna",900],
+	["tuna",1500],
 	["mullet",300],
 	["catshark",350],
 	["water",10],
 	["turtle",4000],
 	["turtlesoup",2500],
-	["donuts",120],
+	["donuts",50],
 	["coffee",10],
 	["tbacon",75],
-	["lockpick",150],
+	["lockpick",550],
 	["pickaxe",1200],
 	["redgull",1500],
 	["fuelF",850],
@@ -382,7 +388,7 @@ buy_array =
 	["RoadCone",150],
 	["RoadBlockWood",1500],
 	["moonshine", 950],
-    ["storage2",100000],
+    ["crowbar", 15000],
     ["lethal", 55000]
 ];
 __CONST__(buy_array,buy_array);
@@ -457,15 +463,14 @@ life_garage_prices =
 	["B_Truck_01_transport_F",25650],
 	["B_Truck_01_box_F", 35000],
 	["O_MRAP_02_F",45000],
-	["B_Heli_Light_01_F",45000],
-	["O_Heli_Light_02_unarmed_F",65000],
 	["C_Rubberboat",400],
 	["C_Boat_Civil_01_F",4500],
 	["B_Boat_Transport_01_F",450],
 	["C_Boat_Civil_01_police_F",3500],
 	["B_Boat_Armed_01_minigun_F",16500],
 	["B_SDV_01_F",25000],
-	["B_MRAP_01_F",7500],	
+	["B_Heli_Light_01_F",45000],
+	["O_Heli_Light_02_unarmed_F",65000],
 	["B_MRAP_01_F",7500]
 ];
 
@@ -484,9 +489,9 @@ __CONST__(life_garage_prices,life_garage_prices);
 
 life_garage_sell =
 [
-	["B_Quadbike_01_F",950],
+	["B_Quadbike_01_F",450],
 	["C_Hatchback_01_F",4500],
-	["C_Offroad_01_F", 6500],
+	["C_Offroad_01_F", 1500],
 	["B_G_Offroad_01_F",3500],
 	["C_SUV_01_F",15000],
 	["C_Van_01_transport_F",25000],
@@ -509,7 +514,6 @@ life_garage_sell =
 	["B_SDV_01_F",45000],
 	["B_MRAP_01_F",10000],
 	["B_Quadbike_01_F",450],
-	["C_Offroad_01_F", 1500],
-	["B_MRAP_01_F",10000]
+	["C_Offroad_01_F", 1500]
 ];
 __CONST__(life_garage_sell,life_garage_sell);

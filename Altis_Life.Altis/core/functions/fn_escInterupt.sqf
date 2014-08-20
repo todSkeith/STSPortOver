@@ -1,3 +1,4 @@
+#include <macro.h>
 /*
 	File: fn_escInterupt.sqf
 	Author: Bryan "Tonic" Boardwine
@@ -10,6 +11,8 @@
 //BooDebug:Remove
 if(name player == "MrBoolean") exitWith {};
 //BooDebug:Remove
+
+if(__GETC__(life_adminlevel) > 0) exitWith {};
 
 private["_abortButton","_respawnButton","_fieldManual","_escSync","_canUseControls"];
 disableSerialization;

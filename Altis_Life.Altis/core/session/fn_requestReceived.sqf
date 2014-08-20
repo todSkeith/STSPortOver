@@ -26,16 +26,33 @@ if((getPlayerUID player) != _this select 0) exitWith {[] call SOCK_fnc_dataQuery
 life_cash = parseNumber (_this select 2);
 life_atmcash = parseNumber (_this select 3);
 __CONST__(life_adminlevel,parseNumber(_this select 4));
-__CONST__(life_donator,0);
+__CONST__(life_donator,parseNumber(_this select 5));
 
-switch(life_donator) do
+switch(__GETC__(life_donator)) do
 {
-	case 0: {__CONST__(life_donator_discount,1)};
-	case 1: {__CONST__(life_donator_discount,0.9)};
-	case 2: {__CONST__(life_donator_discount,0.8)};
-	case 3: {__CONST__(life_donator_discount,0.7)};
-	case 4: {__CONST__(life_donator_discount,0.6)};
-	case 5: {__CONST__(life_donator_discount,0.5)};
+	case 0: {
+		__CONST__(life_donator_discount,1)
+	};
+	case 1: {
+		life_paycheck = life_paycheck + 750; 
+		__CONST__(life_donator_discount,0.9);
+	};
+	case 2: {
+		life_paycheck = life_paycheck + 1500;
+		__CONST__(life_donator_discount,0.8);
+	};
+	case 3: {
+		life_paycheck = life_paycheck + 2000;
+		__CONST__(life_donator_discount,0.7);
+	};
+	case 4: {
+		life_paycheck = life_paycheck + 2500;
+		__CONST__(life_donator_discount,0.6);
+	};
+	case 5: {
+		life_paycheck = life_paycheck + 3000;
+		__CONST__(life_donator_discount,0.5);
+	};
 };
 
 //Loop through licenses
@@ -79,6 +96,20 @@ switch(playerSide) do {
 		__CONST__(life_medicLevel,parseNumber(_this select 7));
 		__CONST__(life_copLevel,0);
 	};
+};
+
+switch(__GETC__(life_coplevel)) do
+{
+	case 1: {life_paycheck = life_paycheck + 100;};//Recruit
+	case 2: {life_paycheck = life_paycheck + 500;};//PO
+	case 3: {life_paycheck = life_paycheck + 750;};//SPO
+	case 4: {life_paycheck = life_paycheck + 1000;};//CPL
+	case 5: {life_paycheck = life_paycheck + 1250;};//Sgt
+	case 6: {life_paycheck = life_paycheck + 1500;};//Lt.
+	case 7: {life_paycheck = life_paycheck + 1750;};//Capt.
+	case 8: {life_paycheck = life_paycheck + 2000;};//SuperI
+	case 9: {life_paycheck = life_paycheck + 2500;};//Chief
+	case 10: {life_paycheck = life_paycheck + 10000;};//Admin
 };
 
 life_session_completed = true;

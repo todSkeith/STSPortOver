@@ -30,3 +30,4 @@ if(_chance >= 50) then {
 	sleep 30;
 	life_knockout = false;
 };
+[[getPlayerUID player,name player,"242"],"life_fnc_wantedAdd",false,false] spawn life_fnc_MP;

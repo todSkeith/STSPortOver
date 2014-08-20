@@ -25,7 +25,6 @@ class Life_Client_Core
 		class initCop {};
 		class initMedic {};
 		class welcomeNotification {};
-		class nosidechat {};
 	};
 	
 	class Admin
@@ -51,19 +50,17 @@ class Life_Client_Core
 	class Medical_System
 	{
 		file = "core\medical";
-		class onPlayerKilled {};
-		class onPlayerRespawn {};
-		class respawned {};
-		class revivePlayer {};
-		class revived {};
+		class drag {};
+		class medicInteractionMenu {};
+		class mediclights {};
+		class medicLoadGear {};
 		class medicMarkers {};
-		class requestMedic {};
-		class medicRequest {};
-		class deathScreen {};
-		class medicLoadout {};
-		class medicSirenLights {};
-		class medicLights {};
 		class medicSiren {};
+		class medicSirenLights {};
+		class revive {};
+		class reviveAction {};
+		class stabilise {};
+		class stabiliseAction {};
 	};
 	
 	class Actions
@@ -424,6 +421,7 @@ class Life_Client_Core
 		class blastingCharge {};
 		class defuseKit {};
 		class storageBox {};
+		class crowbar {};
 		class zipTie {};
 		class crabpot {};
 		class chainsaw {};

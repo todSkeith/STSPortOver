@@ -5,6 +5,7 @@
 	Description:
 	Replaces the mass addactions for various cop actions towards another player.
 */
+#define Title 37401
 #define Btn1 37450
 #define Btn2 37451
 #define Btn3 37452
@@ -13,12 +14,12 @@
 #define Btn6 37455
 #define Btn7 37456
 #define Btn8 37457
-#define Title 37401
 
-private["_display","_curTarget","_Btn1","_Btn2","_Btn3","_Btn4","_Btn5","_Btn6","_Btn7"];
+private["_display","_curTarget","_Btn1","_Btn2","_Btn3","_Btn4","_Btn5","_Btn6","_Btn7","_Btn8"];
 if(!dialog) then {
 	createDialog "pInteraction_Menu";
 };
+
 disableSerialization;
 _curTarget = [_this,0,ObjNull,[ObjNull]] call BIS_fnc_param;
 if(isNull _curTarget) exitWith {closeDialog 0;}; //Bad target
@@ -33,6 +34,7 @@ if(_curTarget isKindOf "House_F") exitWith {
 		_Btn5 = _display displayCtrl Btn5;
 		_Btn6 = _display displayCtrl Btn6;
 		_Btn7 = _display displayCtrl Btn7;
+		_Btn8 = _display displayCtrl Btn8;
 		life_pInact_curTarget = _curTarget;
 		
 		_Btn1 ctrlSetText localize "STR_pInAct_Repair";
@@ -45,6 +47,7 @@ if(_curTarget isKindOf "House_F") exitWith {
 		_Btn5 ctrlShow false;
 		_Btn6 ctrlShow false;
 		_Btn7 ctrlShow false;
+		_Btn8 ctrlShow false;
 	} else {
 		closeDialog 0;
 	};
@@ -59,11 +62,23 @@ _Btn4 = _display displayCtrl Btn4;
 _Btn5 = _display displayCtrl Btn5;
 _Btn6 = _display displayCtrl Btn6;
 _Btn7 = _display displayCtrl Btn7;
+_Btn8 = _display displayCtrl Btn8;
 life_pInact_curTarget = _curTarget;
 
 //Set Unrestrain Button
-_Btn1 ctrlSetText localize "STR_pInAct_Unrestrain";
-_Btn1 buttonSetAction "[life_pInact_curTarget] call life_fnc_unrestrain; closeDialog 0;";
+
+if(life_pInact_curTarget getVariable ["restrained",false]) then {
+	_Btn1 ctrlSetText localize "STR_pInAct_Unrestrain";
+	_Btn1 buttonSetAction "[life_pInact_curTarget] call life_fnc_unrestrain; closeDialog 0; closeDialog 0;";
+} else {
+	if(life_pInact_curTarget getVariable ["zipTie",false]) then {
+		_Btn1 ctrlSetText localize "STR_pInAct_Unrestrain";
+		_Btn1 buttonSetAction "[life_pInact_curTarget] call life_fnc_unzip; closeDialog 0;";
+	} else {
+		_Btn1 ctrlSetText localize "STR_pInAct_Restrain";
+		_Btn1 buttonSetAction "[life_pInact_curTarget] call life_fnc_restrainAction; closeDialog 0;";
+	}
+};
 
 //Set Check Licenses Button
 _Btn2 ctrlSetText localize "STR_pInAct_checkLicenses";
@@ -92,9 +107,15 @@ _Btn6 buttonSetAction "[life_pInact_curTarget] call life_fnc_arrestAction;";
 _Btn7 ctrlSetText localize "STR_pInAct_PutInCar";
 _Btn7 buttonSetAction "[life_pInact_curTarget] call life_fnc_putInCar;";
 
+_Btn8 ctrlSetText "Seize Weapons";
+_Btn8 buttonSetAction "[life_pInact_curTarget] call life_fnc_seizePlayerWeapon; closeDialog 0;";
+
+if(!(life_pInact_curTarget getVariable ["restrained",false])) then {
+	_Btn8 ctrlEnable false;
+};
+
 //Check that you are near a place to jail them.
-if(!((player distance (getMarkerPos "police_hq_1") < 30) OR  (player distance (getMarkerPos "police_hq_2") < 30) OR (player distance (getMarkerPos "cop_spawn_3") < 30) OR (player distance (getMarkerPos "cop_spawn_5") < 30))) then 
+if(!((player distance (getMarkerPos "cop_spawn_1") < 50) OR  (player distance (getMarkerPos "cop_spawn_2") < 50) OR (player distance (getMarkerPos "cop_spawn_3") < 50) OR (player distance (getMarkerPos "cop_spawn_4") < 50) OR (player distance (getMarkerPos "cop_spawn_5") < 50))) then 
 {
 	_Btn6 ctrlEnable false;
 };
-		

@@ -1,3 +1,4 @@
+#include <macro.h>
 /*
 	File: fn_clothingMenu.sqf
 	Author: Bryan "Tonic" Boardwine
@@ -169,3 +170,6 @@ if(playerSide == west) then
 {
 	[] call life_fnc_saveGear;
 };
+
+
+[] call life_fnc_equipGear;

@@ -15,6 +15,7 @@ _sel = lbCurSel _cars;
 _veh = _cars lbData _sel;
 _veh = life_vehicles select parseNumber(_veh);
 _price = _cars lbValue _sel;
+_price = (_price * __GETC__(life_donator_discount));
 if(_veh distance impound_obj < 50) then
 {
 

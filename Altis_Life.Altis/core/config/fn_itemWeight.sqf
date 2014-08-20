@@ -74,6 +74,7 @@ switch (_item) do
 	case "RoadBlockWood": {23};
 	case "coalore": {5};
 	case "steel": {5};
+	case "crowbar": {30};
 	case "storage2": {30};
 	case "storagesmall": {5};
 	case "storagebig": {10};

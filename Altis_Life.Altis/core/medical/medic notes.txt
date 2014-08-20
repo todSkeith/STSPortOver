@@ -1,0 +1,11 @@
+_loadout ="[`primary weapon`,`secondary weapon`,[`magazines`],`uniform`,`vest`,`backpack`,[`ItemMap`,`ItemCompass`,`ItemGPS`,`NVGoggles`,`shades`,`hat`],[`primary attachments`,``,``],[],[`secondary attachments`,``,``],[`uniform inventory`,`16Rnd_9x21_Mag`,`16Rnd_9x21_Mag`,`16Rnd_9x21_Mag`,`30Rnd_65x39_caseless_mag`,`30Rnd_65x39_caseless_mag`],[`vest inventory`,`30Rnd_65x39_caseless_mag`,`30Rnd_65x39_caseless_mag`,`30Rnd_65x39_caseless_mag`,`30Rnd_65x39_caseless_mag`,`30Rnd_65x39_caseless_mag`,`30Rnd_65x39_caseless_mag`,`30Rnd_45ACP_Mag_SMG_01`,`30Rnd_45ACP_Mag_SMG_01`,`30Rnd_45ACP_Mag_SMG_01`,`30Rnd_45ACP_Mag_SMG_01`,`30Rnd_45ACP_Mag_SMG_01`,`30Rnd_45ACP_Mag_SMG_01`],[`backpack inventory`,`Medikit`,`30Rnd_45ACP_Mag_SMG_01`]]"
+
+
+medic Orca = O_Heli_Light_02_unarmed_F
+
+medic uniform = U_I_CombatUniform
+
+
+_loadout ="[``,``,``,[],`U_I_CombatUniform`,``,`B_Kitbag_cbr`,[`ItemMap`,`ItemCompass`,`ItemWatch`,`ItemGPS`,`NVGoggles`,`H_Cap_red`],[``,``,``],[``,``,``],[``,``,``],[],[],[],``,``]";
+
+"[`primary weapon`,`secondary weapon`,[`magazines`],`uniform`,`vest`,`backpack`,[`ItemMap`,`ItemCompass`,`ItemGPS`,`NVGoggles`,`shades`,`hat`],[`primary attachments`,``,``],[],[`secondary attachments`,``,``],[`uniform inventory`,`16Rnd_9x21_Mag`,`16Rnd_9x21_Mag`,`16Rnd_9x21_Mag`,`30Rnd_65x39_caseless_mag`,`30Rnd_65x39_caseless_mag`],[`vest inventory`,`30Rnd_65x39_caseless_mag`,`30Rnd_65x39_caseless_mag`,`30Rnd_65x39_caseless_mag`,`30Rnd_65x39_caseless_mag`,`30Rnd_65x39_caseless_mag`,`30Rnd_65x39_caseless_mag`,`30Rnd_45ACP_Mag_SMG_01`,`30Rnd_45ACP_Mag_SMG_01`,`30Rnd_45ACP_Mag_SMG_01`,`30Rnd_45ACP_Mag_SMG_01`,`30Rnd_45ACP_Mag_SMG_01`,`30Rnd_45ACP_Mag_SMG_01`],[`backpack inventory`,`Medikit`,``]]"

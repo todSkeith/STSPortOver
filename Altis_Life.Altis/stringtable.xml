@@ -1329,8 +1329,8 @@
 	</Package>
 	<Package name="Wanted_Menu">
 		<Key ID="STR_Wanted_Title">
-			<Original>APD Wanted List</Original>
-			<English>APD Wanted List</English>
+			<Original>ALE Wanted List</Original>
+			<English>ALE Wanted List</English>
 			<German>Fahndungsliste</German>
 			<French>Interpol</French>
 			<Italian>Lista Ricercati</Italian>
@@ -4295,6 +4295,21 @@
 			<Italian>Ripara porta</Italian>
 			<Portuguese>Consertar Porta</Portuguese>
 		</Key>
+		<Key ID="STR_pInAct_Revive">
+			<Original>Revive Player</Original>
+		</Key>
+		<Key ID="STR_pInAct_Drag">
+			<Original>Drag Player</Original>
+		</Key>
+		<Key ID="STR_pInAct_Stabilise">
+			<Original>Stabilise</Original>
+		</Key>
+		<Key ID="STR_pInAct_Examine">
+			<Original>Examine Player</Original>
+		</Key>
+		<Key ID="STR_pInAct_Execute">
+			<Original>Lethal Inject</Original>
+		</Key>
 		<Key ID="STR_pInAct_CloseOpen">
 			<Original>Open / Close</Original>
 			<English>Open / Close</English>
@@ -4406,6 +4421,22 @@
 			<French>Déposer pour le gang</French>
 			<Italian>Deposita alla Gang</Italian>
 			<Portuguese>Depositar para a Gangue</Portuguese>
+		</Key>
+		<Key ID="STR_pInAct_RobPerson">
+			<Original>Rob</Original>
+			<English>Rob</English>
+			<German>Rob</German>
+			<French>Rob</French>
+			<Italian>Rob</Italian>
+			<Portuguese>Rob</Portuguese>
+		</Key>
+		<Key ID="STR_pInAct_Restrain">
+			<Original>Restrain</Original>
+			<English>Restrain</English>
+			<German>Restrain</German>
+			<French>Restrain</French>
+			<Italian>Restrain</Italian>
+			<Portuguese>Restrain</Portuguese>
 		</Key>
 	</Package>
 		<Package name="Vehicle_Interaction">

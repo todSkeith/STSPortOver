@@ -37,22 +37,25 @@ life_action_inUse = true;
 };
 
 //Check if it's a dead body.
-if(_curTarget isKindOf "Man" && {!alive _curTarget} && {playerSide in [west,independent]}) exitWith {
-        //Hotfix code by ins0
-        if(((playerSide == blufor && {(call life_revive_cops)}) || playerSide == independent) && {"Medikit" in (items player)}) then {
-                [_curTarget] call life_fnc_revivePlayer;
-        };
+if(_curTarget isKindOf "Man" && {!alive _curTarget} && {playerSide == independent}) then {
+        [_curTarget] call life_fnc_medicInteractionMenu;
 };
-
 
 //If target is a player then check if we can use the cop menu.
 if(isPlayer _curTarget && _curTarget isKindOf "Man") then {
-        if((_curTarget getVariable["restrained",false]) && !dialog && playerSide == west) then {
+
+        if(playerSide == west && {(_curTarget distance player < 5)}) then {
                 [_curTarget] call life_fnc_copInteractionMenu;
         };
-        if(playerSide == civilian) then {
+
+        if(playerSide == civilian && {(_curTarget distance player < 5)}) then {
                 [_curTarget] call life_fnc_civInteractionMenu;
         };
+
+        if(playerSide == independent && {(_curTarget distance player < 5)}) then {
+                [_curTarget] call life_fnc_medicInteractionMenu;
+        };
+
 } else {
         //OK, it wasn't a player so what is it?
         private["_isVehicle","_miscItems","_money"];

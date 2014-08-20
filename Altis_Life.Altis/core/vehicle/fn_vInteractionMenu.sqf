@@ -104,7 +104,9 @@ if(playerSide == west) then {
 	_Btn6 ctrlShow false;
 };
 
-if(playerSide == west or playerSide == independent) then {
+if(playerSide in [west, independent]) then {
+	_Btn5 ctrlShow true;
+	_Btn5 ctrlEnable true;
 	_Btn5 ctrlSetText localize "STR_vInAct_Impound";
 	_Btn5 buttonSetAction "[life_vInact_curTarget] spawn life_fnc_impoundAction;";
 };

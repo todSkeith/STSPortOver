@@ -55,6 +55,11 @@ switch (true) do
 		[] spawn fnc_fishing;
 	};
 
+	case(_item ==  "crowbar"):
+	{
+			[] spawn life_fnc_crowbar;
+	};
+
 	case (_item == "lethal"):
 	{
 		if(([false,_item,1] call life_fnc_handleInv)) then

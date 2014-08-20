@@ -49,7 +49,7 @@ if(side _source != west && alive _source) then
 	{
 		if(alive _source) then
 		{
-			[[getPlayerUID _source,name _source,"480"],"life_fnc_wantedAdd",false,false] spawn life_fnc_MP;
+			//[[getPlayerUID _source,name _source,"480"],"life_fnc_wantedAdd",false,false] spawn life_fnc_MP;
 		};
 	}
 		else
@@ -71,6 +71,7 @@ if(side _source == west && !life_use_atm) then
 if(side _source == civilian && _source != _unit && !local _source) then
 {
 	if(vehicle _source isKindOf "LandVehicle") then {
+		[[getPlayerUID _source,name _source,"480"],"life_fnc_wantedAdd",false,false] spawn life_fnc_MP;
 		[[2],"life_fnc_removeLicenses",_source,false] spawn life_fnc_MP;
 	} else {
 		[[3],"life_fnc_removeLicenses",_source,false] spawn life_fnc_MP;
@@ -91,8 +92,8 @@ if(side _source == west && vehicle _source == _source && playerSide == civilian)
 	};
 };
 
-_handle = [_unit] spawn life_fnc_dropItems;
-waitUntil {scriptDone _handle};
+//_handle = [_unit] spawn life_fnc_dropItems;
+//waitUntil {scriptDone _handle};
 
 _medicsOn = playersNumber independent;
 _lostCash = 0;
@@ -138,7 +139,7 @@ player setVariable ["unconscious", false, true];
 life_holstered = false;
 
 // Sort out the body
-deleteVehicle _unit;
+//deleteVehicle _unit;
 
 { _unit removeAction _x; } foreach life_actions;
 life_actions = [];
